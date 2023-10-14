@@ -17,6 +17,10 @@ configurations {
     }
 }
 
+bootBuildImage{
+    imageName = "utlee/${project.name}:s4"
+}
+
 repositories {
     mavenCentral()
 }
