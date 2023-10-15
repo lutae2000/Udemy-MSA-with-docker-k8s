@@ -2,6 +2,7 @@ package com.example.loans.controller;
 
 import com.example.loans.constants.LoansConstants;
 import com.example.loans.dto.ErrorResponseDto;
+import com.example.loans.dto.LoansContactsDto;
 import com.example.loans.dto.LoansDto;
 import com.example.loans.dto.ResponseDto;
 import com.example.loans.service.LoansService;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -160,4 +162,12 @@ public class LoansController {
         }
     }
 
+    @Autowired
+    private LoansContactsDto loansContactsDto;
+
+    @GetMapping("/account-info")
+    public ResponseEntity<LoansContactsDto> account_info(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(loansContactsDto);
+    }
 }

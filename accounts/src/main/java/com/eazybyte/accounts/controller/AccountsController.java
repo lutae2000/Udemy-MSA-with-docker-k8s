@@ -1,6 +1,7 @@
 package com.eazybyte.accounts.controller;
 
 import com.eazybyte.accounts.constants.AccountsConstants;
+import com.eazybyte.accounts.dto.AccountsContactInfoDto;
 import com.eazybyte.accounts.dto.CustomerDto;
 import com.eazybyte.accounts.dto.ErrorResponseDto;
 import com.eazybyte.accounts.dto.ResponseDto;
@@ -13,6 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +28,20 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
 public class AccountsController {
 
     private AccountService accountService;
+
+    public AccountsController(AccountService accountService) {
+        this.accountService = accountService;
+    }
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary = "create account API",
@@ -111,4 +125,16 @@ public class AccountsController {
                     .body(new ResponseDto(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
         }
     }
+
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo(){
+        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    @GetMapping("/account-info")
+    public ResponseEntity<AccountsContactInfoDto> getJavaVersion(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.cards.controller;
 
 import com.example.cards.constants.CardsConstants;
+import com.example.cards.dto.CardContactInfoDto;
 import com.example.cards.dto.CardsDto;
 import com.example.cards.dto.ErrorResponseDto;
 import com.example.cards.dto.ResponseDto;
@@ -11,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -117,5 +119,15 @@ public class CardsController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_DELETE));
         }
+    }
+
+
+    @Autowired
+    private CardContactInfoDto cardContactInfoDto;
+
+    @GetMapping("/account-info")
+    public ResponseEntity<CardContactInfoDto> account_info(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(cardContactInfoDto);
     }
 }
