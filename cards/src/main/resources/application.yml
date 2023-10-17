@@ -21,9 +21,20 @@ spring:
     import: optional:configserver:http://localhost:8071/
   application:
     name: cards
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
 
 logging:
   level:
     org.hibernate:
       type:
         descriptor.sql: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

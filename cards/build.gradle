@@ -41,6 +41,8 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '4.0.4'
+// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bus-amqp
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp', version: '4.0.1'
 
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     compileOnly 'org.projectlombok:lombok'

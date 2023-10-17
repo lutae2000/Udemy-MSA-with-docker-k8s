@@ -1,6 +1,19 @@
 services:
+  configServer:
+    image: "utlee/configServer:s6"
+    container_name: configserver-ms
+    ports:
+      - "8071:8071"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - utleeNetwork
+      SPRING_CONFIG_IMPORT: "configserver:http://configServer:8071"
+      SPRING_PROFILES_ACTIVE: default
   accounts:
-    image: "utlee/accounts:s4"
+    image: "utlee/accounts:s6"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -10,8 +23,12 @@ services:
           memory: 700m
     networks:
       - utleeNetwork
+    environment:
+#      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_CONFIG_IMPORT: "configserver:http://configServer:8071"
+      SPRING_PROFILES_ACTIVE: default
   loans:
-    image: "utlee/loans:s4"
+    image: "utlee/loans:s6"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -21,8 +38,10 @@ services:
           memory: 700m
     networks:
       - utleeNetwork
+      SPRING_CONFIG_IMPORT: "configserver:http://configServer:8071"
+      SPRING_PROFILES_ACTIVE: default
   cards:
-    image: "utlee/cards:s4"
+    image: "utlee/cards:s6"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -32,6 +51,8 @@ services:
           memory: 700m
     networks:
       - utleeNetwork
+      SPRING_CONFIG_IMPORT: "configserver:http://configServer:8071"
+      SPRING_PROFILES_ACTIVE: default
 networks:
   utleeNetwork:
     driver: "bridge"
