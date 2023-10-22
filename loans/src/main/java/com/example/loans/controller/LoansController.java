@@ -16,6 +16,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +30,23 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
 @Validated
 public class LoansController {
 
     private LoansService loansService;
+
+    public LoansController(LoansService loansService) {
+      this.loansService = loansService;
+    }
+
+    @Autowired
+    private Environment environment;
+
+    @Autowired
+    private LoansContactsDto loansContactsDto;
+
+    @Value("${build.version}")
+    private String buildVersion;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -162,12 +176,23 @@ public class LoansController {
         }
     }
 
-    @Autowired
-    private LoansContactsDto loansContactsDto;
-
-    @GetMapping("/account-info")
-    public ResponseEntity<LoansContactsDto> account_info(){
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(loansContactsDto);
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+      return ResponseEntity
+          .status(HttpStatus.OK)
+          .body(buildVersion);
     }
+
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+      return ResponseEntity
+          .status(HttpStatus.OK)
+          .body(environment.getProperty("JAVA_HOME"));
+    }
+
+      @GetMapping("/contact-info")
+      public ResponseEntity<LoansContactsDto> contactInfo(){
+          return ResponseEntity.status(HttpStatus.OK)
+                  .body(loansContactsDto);
+      }
 }

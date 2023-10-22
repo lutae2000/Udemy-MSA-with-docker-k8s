@@ -16,7 +16,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "eazybytes/configserver:s6"
+    image: "utlee/configserver:s6"
     container_name: configserver-ms
     ports:
       - "8071:8071"
