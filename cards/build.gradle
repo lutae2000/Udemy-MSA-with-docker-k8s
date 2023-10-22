@@ -20,10 +20,16 @@ configurations {
 jib {
     from{
         image = "openjdk:17-jdk-slim"
+        platforms {
+            platform {
+                architecture = "arm64"
+                os = "linux"
+            }
+        }
     }
     to{
         image="utlee/cards"
-        tags=["s4"]
+        tags=["s6"]
     }
 }
 

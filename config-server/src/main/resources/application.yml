@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: config-server
+    name: configserver
   profiles:
     active: git
   #active: native
@@ -32,9 +32,9 @@ management:
       exposure:
         include: "*"
   health:
-    readinessstate:
+    readiness-state:
       enabled: true
-    livenessstate:
+    liveness-state:
       enabled: true
   endpoint:
     health:

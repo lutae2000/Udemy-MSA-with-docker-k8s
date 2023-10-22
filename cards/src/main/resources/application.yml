@@ -1,37 +1,30 @@
 server:
   port: 9000
 spring:
+  application:
+    name: "cards"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
     username: sa
     password: ''
-    driver-class-name: org.h2.Driver
   h2:
     console:
       enabled: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
-  output:
-    ansi:
-      enabled: always
   config:
-    import: optional:configserver:http://localhost:8071/
-  application:
-    name: cards
+    import: "optional:configserver:http://localhost:8071/"
   rabbitmq:
     host: "localhost"
     port: 5672
     username: "guest"
     password: "guest"
-
-logging:
-  level:
-    org.hibernate:
-      type:
-        descriptor.sql: trace
 
 management:
   endpoints:

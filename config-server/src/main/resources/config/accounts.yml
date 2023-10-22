@@ -4,7 +4,7 @@ logging:
       type:
         descriptor.sql: trace
 build:
-  version: "3.0"
+  version: "0.0"
 accounts:
   message: "Welcome to EazyBank accounts related local APIs "
   contactDetails:
