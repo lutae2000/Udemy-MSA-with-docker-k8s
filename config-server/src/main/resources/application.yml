@@ -19,11 +19,7 @@ spring:
 #        native:
 #          search-locations: file:///Users//uitae//Documents//config # Mac 에서 설정파일 불러오기
 #          search-locations: classpath:/config # resources/config 내 설정파일 불러오기
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+
 encrypt:
   key: "45D81EC1EF61DF9AD8D3E5BB397F9"
 management:

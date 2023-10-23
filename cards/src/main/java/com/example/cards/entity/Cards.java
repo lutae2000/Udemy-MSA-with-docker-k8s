@@ -3,6 +3,7 @@ package com.example.cards.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
@@ -15,6 +16,7 @@ public class Cards extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     private Long cardId;
 
     @Column(name = "mobile_number")

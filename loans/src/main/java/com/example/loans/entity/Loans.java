@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Loans {
+public class Loans extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO,generator="native")

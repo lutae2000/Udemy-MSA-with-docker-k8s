@@ -30,7 +30,7 @@ jib {
     }
     to{
         image="utlee/configserver"
-        tags=["s6"]
+        tags=["s7"]
     }
 }
 
@@ -46,9 +46,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.cloud:spring-cloud-config-server'
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bus-amqp
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp', version: '4.0.1'
+//    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp', version: '4.0.1'
 // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-monitor
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-config-monitor', version: '4.0.4'
+//    implementation group: 'org.springframework.cloud', name: 'spring-cloud-config-monitor', version: '4.0.4'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

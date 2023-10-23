@@ -37,7 +37,6 @@ services:
       - "8080:8080"
     environment:
       SPRING_APPLICATION_NAME: "accounts"
-
     extends:
       file: common-config.yml
       service: microservice-configserver-config
