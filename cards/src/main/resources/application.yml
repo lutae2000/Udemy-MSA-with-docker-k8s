@@ -22,9 +22,31 @@ spring:
 #    port: 5672
 #    username: "guest"
 #    password: "guest"
+endpoints:
+  shutdown:
+    enabled: true
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    info:
+      env:
+        enabled: true
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+info:
+  app:
+    name: accounts
+    description: Accounts Application
+    version: 1.0.0
