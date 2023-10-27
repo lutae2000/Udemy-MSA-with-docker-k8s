@@ -30,7 +30,7 @@ jib {
     }
     to{
         image="utlee/configserver"
-        tags=["s7"]
+        tags=["s8"]
     }
 }
 

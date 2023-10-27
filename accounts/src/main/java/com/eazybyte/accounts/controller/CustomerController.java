@@ -48,6 +48,6 @@ public class CustomerController {
                                                                     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10digits")
                                                                     String mobileNumber){
         CustomerDetailsDto customerDetailsDto = customerService.fetchCustomerDetails(mobileNumber);
-        return ResponseEntity.status(HttpStatus.OK).body(customerDetailsDto); 
+        return ResponseEntity.status(HttpStatus.OK).body(customerDetailsDto);
     }
 }

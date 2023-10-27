@@ -24,7 +24,7 @@ jib {
     }
     to{
         image="utlee/loans"
-        tags=["s7"]
+        tags=["s8"]
     }
 }
 
