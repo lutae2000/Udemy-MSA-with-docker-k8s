@@ -32,6 +32,9 @@ jib {
         image="utlee/configserver"
         tags=["s8"]
     }
+    container{
+        jvmFlags = ["-Xms128m", "-Xms128m"]
+    }
 }
 
 repositories {

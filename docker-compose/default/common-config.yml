@@ -25,3 +25,12 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:mariadb://192.168.31.7:33066/webapp?characterEncoding=UTF-8"
       SPRING_DATASOURCE_USERNAME: utlee
       SPRING_DATASOURCE_PASSWORD: p@ssword1
+
+  microservice-eureka-config:
+    extends:
+      service: microservice-configserver-config
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
