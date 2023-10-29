@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
+@Slf4j
 public class LoansController {
 
     private LoansService loansService;
@@ -95,9 +96,11 @@ public class LoansController {
     }
     )
     @GetMapping("/fetch")
-    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestParam
+    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestHeader("utleebank-correlation-id") String correlationId,
+                                                     @RequestParam
                                                      @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
                                                      String mobileNumber) {
+        log.debug("correlation-id: {}", correlationId);
         LoansDto loansDto = loansService.fetchLoan(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(loansDto);
     }

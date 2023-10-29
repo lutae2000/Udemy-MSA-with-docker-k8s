@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@Slf4j
 public class CardsController {
 
     private CardsService cardsService;
@@ -68,9 +70,10 @@ public class CardsController {
             )
     })
     @GetMapping("/fetch")
-    public ResponseEntity<CardsDto> fetchCardDetails(@RequestParam String mobileNumber){
+    public ResponseEntity<CardsDto> fetchCardDetails(@RequestHeader("utleebank-correlation-id") String correlationId,
+                                                     @RequestParam String mobileNumber){
         CardsDto cardsDto = cardsService.searchCard(mobileNumber);
-
+        log.debug("correlation-id: {}", correlationId);
         return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
     }
 
