@@ -130,7 +130,7 @@ public class AccountsController {
     }
 
     @GetMapping("/account-info")
-    public ResponseEntity<AccountsContactInfoDto> getJavaVersion(){
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo(){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(accountsContactInfoDto);
     }
