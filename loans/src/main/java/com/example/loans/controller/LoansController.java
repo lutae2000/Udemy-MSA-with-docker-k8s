@@ -179,6 +179,7 @@ public class LoansController {
         }
     }
 
+
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo() {
       return ResponseEntity
@@ -195,6 +196,7 @@ public class LoansController {
 
       @GetMapping("/contact-info")
       public ResponseEntity<LoansContactsDto> contactInfo(){
+        log.debug("invoked loans contact-info API");
           return ResponseEntity.status(HttpStatus.OK)
                   .body(loansContactsDto);
       }
