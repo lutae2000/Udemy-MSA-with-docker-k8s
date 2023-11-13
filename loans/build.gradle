@@ -57,8 +57,6 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '4.0.3'
     // https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-retry
-    implementation group: 'io.github.resilience4j', name: 'resilience4j-retry', version: '2.1.0'
-
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

@@ -179,7 +179,6 @@ public class LoansController {
         }
     }
 
-
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo() {
       return ResponseEntity
