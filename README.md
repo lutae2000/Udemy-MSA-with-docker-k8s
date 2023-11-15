@@ -47,3 +47,14 @@ Spring Cloud Native 모델상 각 서비스는 직접 통신하는게 아닌 Gat
 point > gateway > mber
 
 - 참조문서: https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/
+
+
+#### [MSA Resilient 패턴]
+##### resilience4j - circuit Breaker
+API가 특정한도이상 초과하여 통신이 불가할 경우 circuit breaker를 오픈하여 트래픽 차단
+
+##### resilience4j - retry
+에러발생하였을때 특정 서비스로 backoff 하여 응답처리 할수 있음
+
+##### resilience4j - ratelimiter
+API통신 빈도수 제한을 통해 응답처리 가능

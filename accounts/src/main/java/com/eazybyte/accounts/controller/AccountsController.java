@@ -6,6 +6,7 @@ import com.eazybyte.accounts.dto.CustomerDto;
 import com.eazybyte.accounts.dto.ErrorResponseDto;
 import com.eazybyte.accounts.dto.ResponseDto;
 import com.eazybyte.accounts.service.AccountService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.concurrent.TimeoutException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -129,9 +131,9 @@ public class AccountsController {
 
     @GetMapping("/build-info")
     @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
-    public ResponseEntity<String> getBuildInfo(){
+    public ResponseEntity<String> getBuildInfo() throws TimeoutException {
         log.debug("getBuildInfo() method Invoked");
-        throw new NullPointerException();
+        throw new TimeoutException();
 //        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
     }
 
@@ -141,9 +143,15 @@ public class AccountsController {
     }
 
     @GetMapping("/account-info")
+    @RateLimiter(name = "getContactInfo", fallbackMethod = "getContactInfoFallback")
     public ResponseEntity<AccountsContactInfoDto> getContactInfo(){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(accountsContactInfoDto);
+    }
+
+    public ResponseEntity<String> getContactInfoFallback(Throwable throwable){
+        return ResponseEntity.status(HttpStatus.OK)
+            .body("getContactInfoFallback response limit");
     }
 
 }
