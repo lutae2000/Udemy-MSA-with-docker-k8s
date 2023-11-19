@@ -20,7 +20,7 @@ configurations {
 
 jib {
     from{
-        image = "openjdk:17-jdk-slim"
+        image = "openjdk:22-ea-17-jdk-slim"
         platforms {
             platform {
                 architecture = "arm64"
@@ -30,7 +30,7 @@ jib {
     }
     to{
         image="utlee/configserver"
-        tags=["s9"]
+        tags=["s10"]
     }
     container{
         jvmFlags = ["-Xms128m", "-Xms128m"]

@@ -14,7 +14,7 @@ java {
 
 jib {
     from{
-        image = "openjdk:17-jdk-slim"
+        image = "openjdk:22-ea-17-jdk-slim"
         platforms {
             platform {
                 architecture = "arm64"
@@ -24,7 +24,7 @@ jib {
     }
     to{
         image="utlee/eurekaserver"
-        tags=["s8"]
+        tags=["s10"]
     }
 }
 
