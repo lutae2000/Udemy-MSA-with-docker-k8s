@@ -30,7 +30,7 @@ jib {
     }
     to{
         image="utlee/accounts"
-        tags=["s10"]
+        tags=["s11"]
     }
 }
 
