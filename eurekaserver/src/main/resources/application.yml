@@ -1,8 +1,9 @@
 spring:
   application:
-    name: eurekaserver
+    name: "eurekaserver"
   config:
-    import: optional:configserver:http://localhost:8071/
+    import: "optional:configserver:http://localhost:8071/"
+
 management:
   endpoints:
     web:
@@ -17,3 +18,6 @@ management:
     health:
       probes:
         enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}

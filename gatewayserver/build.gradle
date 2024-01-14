@@ -45,7 +45,8 @@ dependencies {
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-circuitbreaker-reactor-resilience4j', version: '3.0.3'
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis-reactive
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis-reactive', version: '3.1.5'
-
+	// https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
+	implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.12.1'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
