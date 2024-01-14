@@ -72,8 +72,9 @@ public class CardsController {
     @GetMapping("/fetch")
     public ResponseEntity<CardsDto> fetchCardDetails(@RequestHeader("utleebank-correlation-id") String correlationId,
                                                      @RequestParam String mobileNumber){
+        log.debug("fetchCardDetails method start");
         CardsDto cardsDto = cardsService.searchCard(mobileNumber);
-        log.debug("correlation-id: {}", correlationId);
+        log.debug("fetchCardDetails method end");
         return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
     }
 
