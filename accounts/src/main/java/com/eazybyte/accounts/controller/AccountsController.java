@@ -35,10 +35,6 @@ public class AccountsController {
 
     private AccountService accountService;
 
-    public AccountsController(AccountService accountService) {
-        this.accountService = accountService;
-    }
-
     @Value("${build.version}")
     private String buildVersion;
 

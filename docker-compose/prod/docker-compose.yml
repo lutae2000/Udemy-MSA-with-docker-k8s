@@ -244,7 +244,7 @@ services:
 #      file: common-config.yml
 #      service: microservice-base-config
   configserver:
-    image: "eazybytes/configserver:s11"
+    image: "utlee/configserver:s11"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -253,7 +253,7 @@ services:
       interval: 20s
       timeout: 5s
       retries: 20
-      start_period: 10s
+      start_period: 20s
     extends:
       file: common-config.yml
       service: microservice-base-config
@@ -261,10 +261,13 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
-    image: "eazybytes/eurekaserver:s11"
+    image: "utlee/eurekaserver:s11"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
+    depends_on:
+      configserver:
+        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
       interval: 20s

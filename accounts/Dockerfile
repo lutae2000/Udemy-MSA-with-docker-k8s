@@ -1,8 +1,10 @@
 #Java runtime based on openJDK 17
-FROM openjdk:17-jdk-slim
+FROM openjdk:23-ea-17-jdk-slim
 
 #information around who maintains the image
 MAINTAINER utlee
+
+RUN apt-get update && apt-get install -y curl
 
 # Add the application's jar to the image
 COPY build/libs/accounts-0.0.1-SNAPSHOT.jar accounts-0.0.1-SNAPSHOT.jar

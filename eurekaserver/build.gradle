@@ -14,10 +14,9 @@ java {
 
 jib {
     from{
-        image = "openjdk:22-ea-17-jdk-slim"
         platforms {
             platform {
-                architecture = "amd64"
+                architecture = "arm64"
                 os = "linux"
             }
         }
@@ -39,6 +38,9 @@ ext {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    // https://mvnrepository.com/artifact/io.opentelemetry.javaagent/opentelemetry-javaagent
+    implementation group: 'io.opentelemetry.javaagent', name: 'opentelemetry-javaagent', version: '1.32.0'
+
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
     // https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
     implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.12.1'

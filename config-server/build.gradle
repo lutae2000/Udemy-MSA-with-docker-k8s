@@ -20,7 +20,6 @@ configurations {
 
 jib {
     from{
-        image = "openjdk:22-ea-17-jdk-slim"
         platforms {
             platform {
                 architecture = "arm64"
@@ -31,9 +30,6 @@ jib {
     to{
         image="utlee/configserver"
         tags=["s11"]
-    }
-    container{
-        jvmFlags = ["-Xms128m", "-Xms128m"]
     }
 }
 
@@ -48,6 +44,9 @@ ext {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.cloud:spring-cloud-config-server'
+    // https://mvnrepository.com/artifact/io.opentelemetry.javaagent/opentelemetry-javaagent
+    implementation group: 'io.opentelemetry.javaagent', name: 'opentelemetry-javaagent', version: '1.32.0'
+
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bus-amqp
 //    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp', version: '4.0.1'
 // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-monitor

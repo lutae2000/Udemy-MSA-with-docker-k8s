@@ -14,7 +14,6 @@ java {
 
 jib {
 	from{
-		image = "openjdk:22-ea-17-jdk-slim"
 		platforms {
 			platform {
 				architecture = "arm64"
@@ -41,6 +40,9 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	// https://mvnrepository.com/artifact/io.opentelemetry.javaagent/opentelemetry-javaagent
+	implementation group: 'io.opentelemetry.javaagent', name: 'opentelemetry-javaagent', version: '1.32.0'
+
 	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-circuitbreaker-reactor-resilience4j
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-circuitbreaker-reactor-resilience4j', version: '3.0.3'
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis-reactive

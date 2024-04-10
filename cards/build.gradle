@@ -19,7 +19,6 @@ configurations {
 }
 jib {
     from{
-        image = "openjdk:22-ea-17-jdk-slim"
         platforms {
             platform {
                 architecture = "arm64"
@@ -42,6 +41,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // https://mvnrepository.com/artifact/io.opentelemetry.javaagent/opentelemetry-javaagent
+    implementation group: 'io.opentelemetry.javaagent', name: 'opentelemetry-javaagent', version: '1.32.0'
+
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
