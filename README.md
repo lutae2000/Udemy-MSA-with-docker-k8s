@@ -58,3 +58,8 @@ API가 특정한도이상 초과하여 통신이 불가할 경우 circuit breake
 
 ##### resilience4j - ratelimiter
 API통신 빈도수 제한을 통해 응답처리 가능
+
+#### Grafana Loki 로깅에서 traceId로 Tempo 서비스에서 검색시 각 서비스의 응답시간에 대해 확인 가능
+아래 사진은 G/W -> accounts -> loans 순으로 데이터 조회 요청
+![image](https://github.com/lutae2000/Udemy-MSA-with-docker-k8s/assets/40047335/d68ff5fe-400c-42b5-a1ab-11aca660f8de)
+
