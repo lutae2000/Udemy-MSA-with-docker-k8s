@@ -63,3 +63,9 @@ API통신 빈도수 제한을 통해 응답처리 가능
 아래 사진은 G/W -> accounts -> loans 순으로 데이터 조회 요청
 ![image](https://github.com/lutae2000/Udemy-MSA-with-docker-k8s/assets/40047335/d68ff5fe-400c-42b5-a1ab-11aca660f8de)
 
+### Oath2란?
+네이버, 카카오 페이스북등 간편 로그인을 위해 토큰값을 제공해주고 토큰에 대한 응답으로써 로그인 허용을 하게 해주는 서비스
+여러 솔루션중 KeyCloak을 사용하여 개발 진행
+#### KeyCloak
+![img_1.png](img_1.png)
+![img.png](img.png)
