@@ -127,7 +127,6 @@ public class AccountsController {
     @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
     public ResponseEntity<String> getBuildInfo() throws TimeoutException {
         log.debug("getBuildInfo() method Invoked");
-        ObjectUtils.
         throw new TimeoutException();
 //        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
     }
