@@ -46,9 +46,6 @@ public class LoansController {
     @Autowired
     private LoansContactsDto loansContactsDto;
 
-    @Value("${build.version}")
-    private String buildVersion;
-
     @Operation(
             summary = "Create Loan REST API",
             description = "REST API to create new loan inside EazyBank"
@@ -179,13 +176,6 @@ public class LoansController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_DELETE));
         }
-    }
-
-    @GetMapping("/build-info")
-    public ResponseEntity<String> getBuildInfo() {
-      return ResponseEntity
-          .status(HttpStatus.OK)
-          .body(buildVersion);
     }
 
     @GetMapping("/java-version")

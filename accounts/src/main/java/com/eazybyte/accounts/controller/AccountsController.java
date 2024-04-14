@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(
@@ -34,9 +35,6 @@ import org.springframework.web.bind.annotation.*;
 public class AccountsController {
 
     private AccountService accountService;
-
-    @Value("${build.version}")
-    private String buildVersion;
 
 
     @Autowired
@@ -129,6 +127,7 @@ public class AccountsController {
     @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
     public ResponseEntity<String> getBuildInfo() throws TimeoutException {
         log.debug("getBuildInfo() method Invoked");
+        ObjectUtils.
         throw new TimeoutException();
 //        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
     }
