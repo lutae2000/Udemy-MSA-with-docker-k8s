@@ -25,7 +25,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_CONFIG_IMPORT: "optional:configserver:http://configserver:8071/"
-      SPRING_DATASOURCE_URL: "jdbc:mariadb://192.168.31.7:33066/webapp?characterEncoding=UTF-8"
+      SPRING_DATASOURCE_URL: "jdbc:mariadb://192.168.31.122:33066/webapp?characterEncoding=UTF-8"
       SPRING_DATASOURCE_USERNAME: utlee
       SPRING_DATASOURCE_PASSWORD: p@ssword1
 
