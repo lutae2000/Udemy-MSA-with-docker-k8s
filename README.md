@@ -67,5 +67,19 @@ API통신 빈도수 제한을 통해 응답처리 가능
 네이버, 카카오 페이스북등 간편 로그인을 위해 토큰값을 제공해주고 토큰에 대한 응답으로써 로그인 허용을 하게 해주는 서비스
 여러 솔루션중 KeyCloak을 사용하여 개발 진행
 #### KeyCloak
+![img_2.png](img_2.png)
+http://localhost:7080/realms/master/.well-known/openid-configuration
+
 ![img_1.png](img_1.png)
 ![img.png](img.png)
+
+Postman에서
+Oauth2 토큰 얻어서 호출하는 방법
+![img_3.png](img_3.png)
+
+
+Oauth2 에 대한 플로우
+사용자가 클라이언트 서버에 요청 => 인증서버에 요청 >
+
+Oauth2 실습할수 있는 샘플
+#### https://www.oauth.com/playground/

@@ -77,3 +77,5 @@ resilience4j:
           - java.lang.NullPointerException
         retry-exceptions:
           - java.util.concurrent.TimeoutException
+server:
+  port: 8072
