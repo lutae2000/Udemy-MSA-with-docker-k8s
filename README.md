@@ -83,3 +83,6 @@ Oauth2 에 대한 플로우
 
 Oauth2 실습할수 있는 샘플
 #### https://www.oauth.com/playground/
+
+### RabbitMQ 적용 후 메시지큐에 메시지 전달 
+![img_4.png](img_4.png)
