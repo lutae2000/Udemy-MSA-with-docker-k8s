@@ -2,6 +2,7 @@ package com.eazybyte.accounts.service;
 
 import com.eazybyte.accounts.constants.AccountsConstants;
 import com.eazybyte.accounts.dto.AccountsDto;
+import com.eazybyte.accounts.dto.AccountsMsgDto;
 import com.eazybyte.accounts.dto.CustomerDto;
 import com.eazybyte.accounts.entity.Accounts;
 import com.eazybyte.accounts.entity.Customer;
@@ -12,6 +13,8 @@ import com.eazybyte.accounts.mapper.CustomerMapper;
 import com.eazybyte.accounts.repository.AccountRepository;
 import com.eazybyte.accounts.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,10 +24,12 @@ import org.springframework.util.ObjectUtils;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class AccountService {
 
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
+    private final StreamBridge streamBridge;
 
     public void createAccount(CustomerDto customerDto){
         Customer customer = CustomerMapper.mapToCustomer(customerDto);
@@ -37,7 +42,8 @@ public class AccountService {
             throw new CustomerAlreadyExistsException("Customer already registered with given mobileNumber");
         }
         Customer savedCustomer = customerRepository.save(customer);
-        accountRepository.save(createNewAccount(savedCustomer));
+        Accounts savedAccount = accountRepository.save(createNewAccount(savedCustomer));
+        sendCommunication(savedAccount, savedCustomer);
     }
 
     private Accounts createNewAccount(Customer customer){
@@ -96,5 +102,27 @@ public class AccountService {
         accountRepository.deleteByCustomerId(customer.getCustomerId());
         customerRepository.deleteById(customer.getCustomerId());
         return true;
+    }
+
+    private void sendCommunication(Accounts accounts, Customer customer){
+        var accountsMsgDto = new AccountsMsgDto(accounts.getAccountNumber(), customer.getName(),
+            customer.getEmail(), customer.getMobileNumber());
+        log.info("sending communication request for the details: {}", accountsMsgDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgDto);
+        log.info("sending communication result: {}", result);
+
+    }
+
+    public boolean updateCommunicationStatus(Long accountNumber){
+        boolean isUpdated = false;
+        if(accountNumber != null){
+            Accounts accounts = accountRepository.findById(accountNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Account", "accountNumber", accountNumber.toString())
+            );
+            accounts.setCommunicationSw(true);
+            accountRepository.save(accounts);
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 }
