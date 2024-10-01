@@ -23,7 +23,7 @@ jib {
 	}
 	to{
 		image="utlee/gatewayserver"
-		tags=["s11"]
+		tags=["s13"]
 	}
 }
 

@@ -28,7 +28,7 @@ jib {
     }
     to{
         image="utlee/cards"
-        tags=["s11"]
+        tags=["s13"]
     }
 }
 

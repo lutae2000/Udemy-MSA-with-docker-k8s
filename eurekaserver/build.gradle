@@ -23,7 +23,7 @@ jib {
     }
     to{
         image="utlee/eurekaserver"
-        tags=["s11"]
+        tags=["s13"]
     }
 }
 
