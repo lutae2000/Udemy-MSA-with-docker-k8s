@@ -1,30 +1,19 @@
 services:
-  #  rabbit:
-  #    image: rabbitmq:3.12-management
-  #    hostname: rabbitmq
-  #    ports:
-  #      - "5672:5672"
-  #      - "15672:15672"
-  #    healthcheck:
-  #      test: rabbitmq-diagnostics check_port_connectivity
-  #      interval: 10s
-  #      timeout: 5s
-  #      retries: 10
-  #      start_period: 5s
-  #    extends:
-  #      file: common-config.yml
-  #      service: network-deploy-service
-#  redis:
-#    image: redis
-#    ports:
-#      - 6379:6379
-#    healthcheck:
-#      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
-#      timeout: 10s
-#      retries: 10
-#    extends:
-#      service: network-deploy-service
-#      file: common-config.yml
+  rabbit:
+    image: rabbitmq:3.13-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
   keycloak:
     image: quay.io/keycloak/keycloak:25.0.2
     container_name: keycloak
@@ -256,7 +245,7 @@ services:
 #      file: common-config.yml
 #      service: microservice-base-config
   configserver:
-    image: "utlee/configserver:s11"
+    image: "utlee/configserver:s13"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -273,7 +262,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
-    image: "utlee/eurekaserver:s11"
+    image: "utlee/eurekaserver:s13"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -294,7 +283,7 @@ services:
       OTEL_SERVICE_NAME: "eurekaserver"
 
   accounts:
-    image: "utlee/accounts:s11"
+    image: "utlee/accounts:s13"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -307,12 +296,13 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       OTEL_SERVICE_NAME: "accounts"
+      SPRING_RABBITMQ_HOST: "rabbit"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
 
   loans:
-    image: "utlee/loans:s11"
+    image: "utlee/loans:s13"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -330,7 +320,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "utlee/cards:s11"
+    image: "utlee/cards:s13"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -346,9 +336,19 @@ services:
     extends:
       file: common-config.yml
       service: microservice-eureka-config
-
+  message:
+    image: "utlee/message:s13"
+    container_name: message-ms
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    environment:
+      SPRING_RABBITMQ_HOST: "rabbit"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
   gatewayserver:
-    image: "utlee/gatewayserver:s11"
+    image: "utlee/gatewayserver:s13"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
