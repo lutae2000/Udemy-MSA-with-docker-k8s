@@ -72,12 +72,12 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-circuitbreaker-reactor-resilience4j
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-circuitbreaker-reactor-resilience4j', version: '3.0.3'
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-stream
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream', version: '4.1.3'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream'
 // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-stream-binder-rabbit
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream-binder-kafka', version: '4.1.3'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-stream-binder-kafka'
 
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
-    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.3.0'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
